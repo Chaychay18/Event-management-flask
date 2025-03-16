@@ -1,0 +1,7 @@
+{
+    "liveServer.settings.defaultBrowser": "chrome",
+    "liveServer.settings.CustomBrowser": "chrome",
+    "simpleBrowser.focusLockIndicator.enabled": false,
+    "preview-in-browser.browser": "chrome"
+
+}

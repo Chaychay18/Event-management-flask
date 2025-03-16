@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: blue;
+            font-size: 36px;
+        }
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            text-align: center;
+        }
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+        
+        img {
+            width: 100%;
+            display: flex;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            transition: transform 1000ms;
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            grid-template-rows: repeat(2, 1fr); /* 2 rows */
+            max-width: 100%;
+        }
+        figure {
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+        figure::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(0, 0, 0, 0.5);
+            transform-origin: center;
+            opacity: 0;
+            transform: scale(2);
+            transition: opacity 300ms;
+        }
+        figcaption  {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            place-items: center;
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            font-size: 3.2rem;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 600ms, transform 600ms;
+        }
+        a:is(:hover, :focus) figure::after {
+            opacity: 1;
+        }
+        a:is(:hover, :focus) figcaption {
+            opacity: 1;
+            transition: opacity 600ms;
+        }
+        
+        
+        @media (prefers-reduced-motion: no-preference) {
+            figcaption {
+                transform: translate3d(0, 2rem, 0);
+            }
+            figure::after {
+                border-radius: 50%;
+                opacity: 1;
+                transform: scale(0);
+                transition: transform 900ms;
+            }
+            a:is(:hover, :focus) figure::after {
+                transform: scale(2.5);
+            }
+            a:is(:hover, :focus) figcaption {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+                transition: opacity 600ms 400ms, transform 600ms 400ms;
+            }
+            a:is(:hover, :focus) img {
+                transform: scale(1.2);
+            }
+        }
+        header{
+    height: 65px;
+    background-color: #222;
+  }
+  header span{
+    color: white;
+
+  }
+  header span b{
+    color: var(--main-color);
+  }
+    </style>
+</head>
+<body>
+    <header>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="{{url_for('home_dashboard')}}"><i class="fas fa-home"></i> Home</a>
+        <a href="{{url_for('profile_dashboard')}}"><i class="fas fa-user"></i>  Profile</a>
+        <a href="{{url_for('events')}}"><i class="fas fa-calendar-alt"></i> Events</a>
+        <a href="{{url_for('orders')}}"><i class="fas fa-shopping-cart"></i> Orders</a>
+        <a href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; <b>AD</b>events</span>
+    </header>
+
+    <h1>Welcome to AD EVENTS</h1>
+    <ul>
+        <li>
+            <a href="{{url_for('wedding')}}">
+                <figure>
+                    <img src="images/g-1.jpg" alt="wedding">
+                    <figcaption><h3>WEDDING</h3></figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="{{url_for('birthday')}}">
+                <figure>
+                    <img src="images/birth.jpg" alt="Birthday">
+                    <figcaption>BIRTHDAY</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="{{url_for('nc')}}">
+                <figure>
+                    <img src="images/nc.jpg" alt="naming ceremony">
+                    <figcaption>NAMING CEREMONY</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="{{url_for('corp')}}">
+                <figure>
+                    <img src="images/slide3.jpg" alt="corporate party">
+                    <figcaption>CORPORATE PARTY</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="{{url_for('bach')}}">
+                <figure>
+                    <img src="images/bache.jpg" alt="bachelor party">
+                    <figcaption>BACHELOR PARTY</figcaption>
+                </figure>
+            </a>
+        </li>
+        <li>
+            <a href="{{url_for('confirm_page')}}">
+                <figure>
+                    <img src="images/slide6.jpg" alt="others">
+                    <figcaption>OTHERS</figcaption>
+                </figure>
+            </a>
+        </li>
+    </ul>
+    <br><br><br><br>
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Branches</h3>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Mysore</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Mangalore</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Hassan</a>
+            </div>
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="#"><i class="fas fa-arrow-right"></i> Home</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Services</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> About us</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Gallery</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Prices</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Login</a>
+            </div>
+            <div class="box">
+                <h3>Contact Info</h3>
+                <a href="tel:+919731594066"><i class="fas fa-phone"></i> +91 9731594066</a>
+                <a href="tel:+916364157985"><i class="fas fa-phone"></i> +91 6364157985</a>
+                <a href="mailto:deeksha@gmail.com"><i class="fas fa-envelope"></i> deeksha@gmail.com</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru, India - 560004</a>
+            </div>
+            <div class="box">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fas fa-facebook-f"></i> Facebook</a>
+                <a href="#"><i class="fas fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fas fa-instagram"></i> Instagram</a>
+                <a href="#"><i class="fas fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+        <div class="credit">Created by <span>Deeksha S</span> | All rights reserved</div>
+    </section>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.body.style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.body.style.marginLeft = "0";
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

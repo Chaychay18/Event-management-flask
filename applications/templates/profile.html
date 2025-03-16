@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Home</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no" />
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- Import Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align: center;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  .column {
+    float: left;
+    width: 25%;
+    padding: 10px;
+  }
+
+  .column img {
+    opacity: 0.8; 
+    cursor: pointer; 
+  }
+
+  .column img:hover {
+    opacity: 1;
+  }
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .container {
+    position: relative;
+    display: none;
+  }
+
+  #imgtext {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: white;
+    font-size: 20px;
+  }
+
+  .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+  }
+
+  .box-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .footer .box:first-child {
+    margin-left: 20px;
+  }
+
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 40%;
+    margin: auto;
+    margin-top: 10px;
+    margin-left: 50px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    border-color: #111;
+    font-family: 'Roboto', sans-serif;
+    background: #f1f1f1;
+    box-shadow: 3px 3px 10px 3px #007bff;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  .container2 {
+    padding: 2px 16px;
+    color: #222;
+  }
+
+  img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: x-large;
+  }
+
+  .profile-field {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+
+  .profile-field p {
+    margin: 5px 0;
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .sidenav {
+      padding-top: 15px;
+    }
+    .sidenav a {
+      font-size: 18px;
+    }
+    .card {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .footer .box-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .footer .box {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .sidenav a {
+      font-size: 16px;
+      padding: 8px;
+    }
+    .card {
+      width: 95%;
+    }
+    h2 {
+      font-size: large;
+    }
+    .profile-field {
+      padding: 5px;
+    }
+  }
+  header{
+    background: #222;
+  }
+  header span{
+    color: white;
+
+  }
+  header span b{
+    color: var(--main-color);
+  }
+</style>
+</head>
+
+<body>
+  <header>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="{{url_for('home_dashboard')}}"><i class="fas fa-home"></i> Home</a>
+    <a href="{{url_for('profile_dashboard')}}"><i class="fas fa-user"></i> Profile</a>
+    <a href="{{url_for('events')}}"><i class="fas fa-calendar-alt"></i> Events</a>
+    <a href="{{url_for('orders')}}"><i class="fas fa-shopping-cart"></i> Orders</a>
+    <a href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; <b>AD</b>events</span>
+</header>
+
+<!-- Added text at the top -->
+<h1 style="text-align: center; margin-top: 20px;">Welcome to AD EVENTS</h1>
+
+<h2>YOUR PROFILE</h2>
+<div class="card">
+  <img src="images/img_avatar.png" alt="Avatar" style="width: 200px;">
+  <div class="container2">
+    <div class="profile-field">
+      <h4><b><h1>Name:</h1></b> <h3> {{ first_name }}</h3></h4>
+    </div>
+    <div class="profile-field">
+      <p><strong><h1>Email:</h1></strong> <h3>{{ email_address }}</h3></p>
+    </div>
+    <div class="profile-field">
+      <p><strong><h1>Phone Number:</h1></strong> <h3>{{ mobile_number }}</h3></p>
+    </div>
+    <div class="profile-field">
+      <p><strong><h1>Address:</h1></strong><h3> {{ address }}</h3></p>
+    </div>
+    <div class="profile-field">
+      <p><strong><h1>City:</h1></strong> <h3>{{ city }}</p>
+    </div>
+  </div>
+</div>
+
+<section class="footer">
+  <div class="box-container">
+    <div class="box">
+      <h3>Branches</h3>
+      <a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a>
+      <a href="#"><i class="fas fa-map-marker-alt"></i> Mysore</a>
+      <a href="#"><i class="fas fa-map-marker-alt"></i> Mangalore</a>
+      <a href="#"><i class="fas fa-map-marker-alt"></i> Hassan</a>
+    </div>
+    <div class="box">
+      <h3>Quick Links</h3>
+      <a href="#"><i class="fas fa-arrow-right"></i> Home</a>
+      <a href="#"><i class="fas fa-arrow-right"></i> Services</a>
+      <a href="#"><i class="fas fa-arrow-right"></i> About us</a>
+      <a href="#"><i class="fas fa-arrow-right"></i> Gallery</a>
+      <a href="#"><i class="fas fa-arrow-right"></i> Prices</a>
+      <a href="#"><i class="fas fa-arrow-right"></i> Login</a>
+    </div>
+    <div class="box">
+      <h3>Contact Info</h3>
+      <a href="tel:+919731594066"><i class="fas fa-phone"></i> +91 9731594066</a>
+      <a href="tel:+916364157985"><i class="fas fa-phone"></i> +91 6364157985</a>
+      <a href="mailto:deeksha@gmail.com"><i class="fas fa-envelope"></i> deeksha@gmail.com</a>
+      <a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru, India - 560004</a>
+    </div>
+    <div class="box">
+      <h3>Follow Us</h3>
+      <a href="#"><i class="fas fa-facebook-f"></i> Facebook</a>
+      <a href="#"><i class="fas fa-twitter"></i> Twitter</a>
+      <a href="#"><i class="fas fa-instagram"></i> Instagram</a>
+      <a href="#"><i class="fas fa-linkedin"></i> LinkedIn</a>
+    </div>
+  </div>
+  <div class="credit">Created by <span>Deeksha S</span> | All rights reserved</div>
+</section>
+
+<script>
+ function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.body.style.marginLeft = "250px"; /* Shift content to the right */
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.body.style.marginLeft= "0"; /* Reset content position */
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

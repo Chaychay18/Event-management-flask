@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>View Bookings</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background: #f7f7f7;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #222;
+            padding-left: 250px; /* Space for side navigation */
+            box-sizing: border-box;
+        }
+
+        .booking-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+            background: white;
+            box-shadow: 3px 3px 10px 3px #007bff;
+            justify-content: center;
+            align-content: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            animation: slideDown 0.6s ease-in-out;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #007bff;
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Styles for Adevents and mySidenav */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px; /* Width of mySidenav */
+            height: 100%;
+            background-color: #111;
+            padding-top: 20px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        #mySidenav {
+            width: 250px;
+            display: block;
+            transition: 0.5s;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            padding-top: 60px;
+            z-index: 1;
+        }
+
+        #mySidenav a {
+            padding: 10px 8px 10px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            text-align: left;
+        }
+
+        #mySidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        #mySidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        header{
+    background: #222;
+  }
+  header span{
+    color: white;
+
+  }
+  header span b{
+    color: var(--main-color);
+  }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <span style="font-size:30px;cursor:pointer; color: #f1f1f1;" onclick="openNav()">&#9776; ADevents</span>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="{{url_for('home_dashboard')}}"><i class="fas fa-home"></i> Home</a>
+            <a href="{{url_for('profile_dashboard')}}"><i class="fas fa-user"></i> Profile</a>
+            <a href="{{url_for('events')}}"><i class="fas fa-calendar-alt"></i> Events</a>
+            <a href="{{url_for('orders')}}"><i class="fas fa-shopping-cart"></i> Orders</a>
+            <a href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="booking-container">
+            <h1>Booking Details</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Event Type</th>
+                        <th>Event Date</th>
+                        <th>Payment Method</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.event_name }}</td>
+                        <td>{{ booking.event_type }}</td>
+                        <td>{{ booking.event_date }}</td>
+                        <td>{{ booking.payment_method }}</td>
+                        <td>Jayanagar</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+</html>

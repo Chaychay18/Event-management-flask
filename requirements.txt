@@ -1,0 +1,12 @@
+Flask==2.3.2
+SQLAlchemy==2.0.17
+Flask-SQLAlchemy==3.0.3
+Jinja2==3.1.2
+gunicorn==20.1.0  # For production deployment
+Werkzeug==2.3.4
+itsdangerous==2.1.2
+click==8.1.4
+Flask-WTF==1.1.1  # If you use Flask-WTF for forms
+Flask-Login==0.6.2  # If you use Flask-Login for user sessions
+Flask-Migrate==4.0.4  # For database migrations
+Flask-Script==2.0.6  # For command line scripts

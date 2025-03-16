@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        header {
+            background: #222;
+        }
+        header span {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+        header span b {
+            color: var(--main-color);
+        }
+        p {
+            justify-content: start;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .left-container {
+            flex: 1;
+        }
+        .left-container p{
+            display: flex;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 3.0rem;
+        }
+        .right-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .get-started-btn {
+            display:flex;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background-color: var(--main-color);
+            border: 2px solid transparent;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-right: 100px;
+            cursor: pointer;
+            margin-right: 50%;
+        
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .column {
+            flex: 1;
+            margin: 0 10px;
+        }
+        .column img {
+            width: 100%;
+            cursor: pointer;
+        }
+        .expanded-container {
+            display: none;
+        }
+        .carousel {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-container {
+    display: flex;
+    animation: rotate 10s infinite linear;
+}
+
+.carousel-container img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+@keyframes rotate {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(0); }
+    25% { transform: translateX(-100%); }
+    45% { transform: translateX(-100%); }
+    50% { transform: translateX(-200%); }
+    70% { transform: translateX(-200%); }
+    75% { transform: translateX(-300%); }
+    95% { transform: translateX(-300%); }
+    100% { transform: translateX(-400%); }
+}
+    </style>
+</head>
+<body>
+<header>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="{{url_for('home_dashboard')}}"><i class="fas fa-home"></i> Home</a>
+        <a href="{{url_for('profile_dashboard')}}"><i class="fas fa-user"></i> Profile</a>
+        <a href="{{url_for('events')}}"><i class="fas fa-calendar-alt"></i> Events</a>
+        <a href="{{url_for('orders')}}"><i class="fas fa-shopping-cart"></i> Orders</a>
+        <a href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; <b>AD</b>events</span>
+</header>
+
+<h1 style="text-align: center; margin-top: 20px;">Welcome to AD EVENTS</h1>
+
+<div class="container">
+    <div class="left-container">
+        <p>Elevate your special occasions with our premier event planning and decoration services! We specialize in transforming your visions into unforgettable experiences, whether it's a wedding, corporate event, birthday party, or any other celebration. Our dedicated team combines creativity with meticulous attention to detail, ensuring every aspect of your event is perfectly curated and beautifully executed.</p>
+    </div>
+    <div class="right-container">
+        <div class="carousel">
+            <div class="carousel-container">
+                <img src="images/g-4.jpg" alt="logo">
+                <img src="images/g-6.jpg" alt="Nature">
+                <img src="images/g-7.jpg" alt="event">
+                <img src="images/big3.jpg" alt="events">
+            </div>
+        </div>
+        </div>
+</div>
+<br><br>
+<a href="{{ url_for('events')}}">
+<button class="get-started-btn">Get Started</button>
+</a>
+
+
+<div class="row">
+    <div class="column">
+        <img src="images/big5.jpg" alt="Nature" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="images/big2.jpg" alt="Snow" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="images/g-2.jpg" alt="Mountains" onclick="myFunction(this);">
+    </div>
+    <div class="column">
+        <img src="images/g-4.jpg" alt="Lights" onclick="myFunction(this);">
+    </div>
+</div>
+
+<div class="expanded-container">
+    <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+    <img id="expandedImg" style="width:100%">
+    <div id="imgtext"></div>
+</div>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.body.style.marginLeft = "250px"; /* Shift content to the right */
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.body.style.marginLeft= "0"; /* Reset content position */
+    }
+
+    function myFunction(imgs) {
+        var expandImg = document.getElementById("expandedImg");
+        var imgText = document.getElementById("imgtext");
+        expandImg.src = imgs.src;
+        imgText.innerHTML = imgs.alt;
+        expandImg.parentElement.style.display = "block";
+    }
+</script>
+
+<section class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>Branches</h3>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Mysore</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Mangalore</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Hassan</a>
+        </div>
+        <div class="box">
+            <h3>Quick Links</h3>
+            <a href="#"><i class="fas fa-arrow-right"></i> Home</a>
+            <a href="#"><i class="fas fa-arrow-right"></i> Services</a>
+            <a href="#"><i class="fas fa-arrow-right"></i> About us</a>
+            <a href="#"><i class="fas fa-arrow-right"></i> Gallery</a>
+            <a href="#"><i class="fas fa-arrow-right"></i> Prices</a>
+            <a href="#"><i class="fas fa-arrow-right"></i> Login</a>
+        </div>
+        <div class="box">
+            <h3>Contact Info</h3>
+            <a href="tel:+919731594066"><i class="fas fa-phone"></i> +91 9731594066</a>
+            <a href="tel:+916364157985"><i class="fas fa-phone"></i> +91 6364157985</a>
+            <a href="mailto:deeksha@gmail.com"><i class="fas fa-envelope"></i> deeksha@gmail.com</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru, India - 560004</a>
+        </div>
+        <div class="box">
+            <h3>Follow Us</h3>
+            <a href="#"><i class="fas fa-facebook-f"></i> Facebook</a>
+            <a href="#"><i class="fas fa-twitter"></i> Twitter</a>
+            <a href="#"><i class="fas fa-instagram"></i> Instagram</a>
+            <a href="#"><i class="fas fa-linkedin"></i> LinkedIn</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>
